@@ -1,4 +1,4 @@
-package com.jiawa.wiki;
+package com.jiawa.wiki.config;
 
 
 import org.slf4j.Logger;
