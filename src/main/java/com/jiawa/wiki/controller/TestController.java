@@ -23,6 +23,8 @@ public class TestController {
         return "hello world!"+testhello;
     }
 
+
+
     @GetMapping("/test/list")
     public List<Test> list(){return testService.list();}
 
