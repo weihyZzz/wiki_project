@@ -48,6 +48,8 @@
         <!--<table tableName="content"/>-->
         <!--<table tableName="user"/>-->
 <!--        <table tableName="demo"/>-->
+
+        <!-- 生成什么表的持久层代码，就tablename写什么><!-->
         <table tableName="ebook" domainObjectName="Ebook"/>
     </context>
 </generatorConfiguration>
