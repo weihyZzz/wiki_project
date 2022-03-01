@@ -9,6 +9,7 @@ import com.jiawa.wiki.resp.EbookResp;
 import com.jiawa.wiki.util.CopyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -21,7 +22,9 @@ public class EbookService {
     public List<EbookResp> list(EbookReq req){
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
-        criteria.andNameLike("%"+req.getName()+"%");//模糊查询
+        if(!ObjectUtils.isEmpty(req.getName())){
+            criteria.andNameLike("%"+req.getName()+"%");//模糊查询
+        }//动态SQL，如果电子书名不为空，则进行查询
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 //        //将得到的内容转换成EbookResp类型return回去
 //        List<EbookResp> respList=new ArrayList<>();

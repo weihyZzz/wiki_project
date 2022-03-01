@@ -104,7 +104,7 @@ export default defineComponent({
       //初始化方法写到onMounted里，
       //后端接口地址
       console.log("onMounted");
-      axios.get("http://localhost:8880/ebook/list?name=sql").then(function (response) {
+      axios.get("http://localhost:8880/ebook/list").then(function (response) {
         const data=response.data;//后端CommonResponse的数据结构
         ebooks.value=data.content;
         ebooks1.books=data.content;//reactive方式的赋值，
@@ -131,3 +131,14 @@ export default defineComponent({
   }
 });
 </script>
+
+<!--修饰图标等样式-->
+<style scoped>
+  .ant-avatar {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 8%;
+    margin: 5px 0;
+  }
+</style>
