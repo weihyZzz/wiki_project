@@ -55,11 +55,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
+import axios from 'axios';
 export default defineComponent({
   name: 'Home',
-  components: {
+  setup(){
+    console.log("setup");
+    //后端接口地址
+    axios.get("http://localhost:8880/ebook/list?name=sql").then(function (response) {
+    console.log(response);
+    })
 
-  },
+  }
 });
 </script>
