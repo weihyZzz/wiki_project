@@ -48,36 +48,27 @@
       <a-layout-content
               :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
       >
-<!--        pre标签展示所包含变量的内容-->
-        <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="listData">
-          <template #footer>
-            <div>
-              <b>ant design vue</b>
-              footer part
-            </div>
-          </template>
+<!--        grid来设置{gutter 间距， column 一行显示3个}-->
+        <a-list item-layout="vertical" size="large" :grid="{gutter: 18, column: 3}" :data-source="ebooks">
+<!--          下方的item自动循环ebooks里数据-->
           <template #renderItem="{ item }">
-            <a-list-item key="item.title">
+<!--            item.name=>电子书名-->
+            <a-list-item key="item.name">
               <template #actions>
-          <span v-for="{ type, text } in actions" :key="type">
-            <component v-bind:is="type" style="margin-right: 8px" />
-            {{ text }}
-          </span>
+                <span v-for="{ type, text } in actions" :key="type">
+                  <component v-bind:is="type" style="margin-right: 8px" />
+                  {{ text }}
+                </span>
               </template>
-              <template #extra>
-                <img
-                        width="272"
-                        alt="logo"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                />
-              </template>
+
               <a-list-item-meta :description="item.description">
                 <template #title>
-                  <a :href="item.href">{{ item.title }}</a>
+                  <a :href="item.href">{{ item.name }}</a>
                 </template>
-                <template #avatar><a-avatar :src="item.avatar" /></template>
+<!--                item.cover=>电子书封面-->
+                <template #avatar><a-avatar :src="item.cover" /></template>
               </a-list-item-meta>
-              {{ item.content }}
+
             </a-list-item>
           </template>
         </a-list>
