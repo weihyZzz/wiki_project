@@ -48,23 +48,41 @@
       <a-layout-content
               :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
       >
-        Content
+<!--        pre标签展示所包含变量的内容-->
+        <pre>
+          {{ebooks}}}
+          {{ebooks2}}}
+        </pre>
+
       </a-layout-content>
     </a-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent ,onMounted,ref,reactive,toRef} from 'vue';//用vue的什么功能，就导入什么
 import axios from 'axios';
 export default defineComponent({
   name: 'Home',
   setup(){
     console.log("setup");
-    //后端接口地址
-    axios.get("http://localhost:8880/ebook/list?name=sql").then(function (response) {
-    console.log(response);
-    })
+    const ebooks=ref();//ref为响应式数据类型，使得此变量呈现的数据随后端的更新而变化
+    const ebooks1=reactive({books:[]}); //reactive方式来响应后端数据
+    onMounted(()=>{
+      //初始化方法写到onMounted里，
+      //后端接口地址
+      console.log("onMounted");
+      axios.get("http://localhost:8880/ebook/list?name=sql").then(function (response) {
+        const data=response.data;//后端CommonResponse的数据结构
+        ebooks.value=data.content;
+        ebooks1.books=data.content;//reactive方式的赋值，
+        console.log(response);
+      });
+    });
 
+    return{
+      ebooks,
+      ebooks2:toRef(ebooks1,"books")
+    }
   }
 });
 </script>
